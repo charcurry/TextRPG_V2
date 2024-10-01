@@ -67,6 +67,7 @@
     <Compile Include="Entities\Stat.cs" />
     <Compile Include="UIElements\Camera.cs" />
     <Compile Include="UIElements\ControlsWindow.cs" />
+    <Compile Include="UIElements\EnemyStatWindow.cs" />
     <Compile Include="UIElements\EventLog.cs" />
     <Compile Include="UIElements\StatWindow.cs" />
     <Compile Include="UIElements\UIWindow.cs" />

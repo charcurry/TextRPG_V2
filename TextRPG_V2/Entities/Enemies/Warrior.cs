@@ -38,6 +38,7 @@ namespace TextRPG_V2
             spd = new Stat(8);
             skl = new Stat(4);
             luc = new Stat(10);
+            gld = new Stat(15);
 
             ChooseDirection();
         }

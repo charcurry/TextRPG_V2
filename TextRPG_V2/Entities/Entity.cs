@@ -24,6 +24,7 @@ namespace TextRPG_V2
         private char symbol; //the graphical representation of the Entity
         private Faction faction;
         private bool magic;
+        public bool killedByPlayer;
 
         //Stats
         public HealthSystem health; //the health value of the entity
@@ -34,6 +35,7 @@ namespace TextRPG_V2
         public Stat spd; //the rate at which the entity can take turns (also used in avoid and hit calcs)
         public Stat skl; //Value used in hit, crit and avoid calculations
         public Stat luc; //Value used in hit, crit and avoid calculations
+        public Stat gld; //Value used for purchasing items for the player or the amount of gold dropped by enemies
 
         //derived values
 
@@ -59,7 +61,7 @@ namespace TextRPG_V2
         /// <param name="spd">the rate at which the entity can take turns</param>
         /// <param name="skl">Value used in hit, crit and avoid calculations</param>
         /// <param name="luc">Value used in hit, crit and avoid calculations</param>
-        public Entity(string name, char symbol, ConsoleColor color, int atk, int def, int mag, int res, int spd, int skl, int luc)
+        public Entity(string name, char symbol, ConsoleColor color, int atk, int def, int mag, int res, int spd, int skl, int luc, int gld)
         {
             //Setting entity variables
             this.name = name;
@@ -75,6 +77,7 @@ namespace TextRPG_V2
             this.spd = new Stat(spd);
             this.skl = new Stat(skl);
             this.luc = new Stat(luc);
+            this.gld = new Stat(gld);
 
             rnd = new Random();
         }
@@ -95,6 +98,7 @@ namespace TextRPG_V2
             spd = null;
             skl = null;
             luc = null;
+            gld = null;
 
             rnd = new Random();
         }
@@ -191,6 +195,11 @@ namespace TextRPG_V2
             else
             {
                 attackMessage += " and missed.";  
+            }
+
+            if (target.health.GetHp() <= 0 && name == "Player")
+            {
+                target.killedByPlayer = true;
             }
 
             return attackMessage;

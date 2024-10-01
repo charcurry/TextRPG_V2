@@ -27,6 +27,7 @@ namespace TextRPG_V2
             base.spd = new Stat(10);
             base.skl = new Stat(10);
             base.luc = new Stat(10);
+            base.gld = new Stat(10);
 
         }
 

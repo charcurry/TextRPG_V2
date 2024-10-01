@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TextRPG_V2
 {
-    public class StatWindow : UIWindow
+    public class EnemyStatWindow : UIWindow
     {
         private Entity entity; //entity that the stat window tracks
 
@@ -14,7 +14,7 @@ namespace TextRPG_V2
         /// Constructor method for a StatWindow object
         /// </summary>
         /// <param name="entity">The target Entity for the StatWindow to track</param>
-        public StatWindow(Entity entity) : base(GlobalVariables.statWindowWidth, GlobalVariables.statWindowHeight)
+        public EnemyStatWindow(Entity entity) : base(GlobalVariables.enemyStatWindowWidth, GlobalVariables.enemyStatWindowHeight)
         {
             this.entity = entity;
         }
@@ -37,7 +37,6 @@ namespace TextRPG_V2
                 base.AddLine(7, "SPD: " + entity.spd.GetStat());
                 base.AddLine(8, "SKL: " + entity.skl.GetStat());
                 base.AddLine(9, "LUC: " + entity.luc.GetStat());
-                base.AddLine(10, "GLD: " + entity.gld.GetStat());
             } 
         }
 

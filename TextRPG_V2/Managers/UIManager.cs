@@ -10,7 +10,7 @@ namespace TextRPG_V2
     {
         private Camera gameplayWindow; //Camera that projects the game world
         private StatWindow playerStatWindow; //Window that shows the player's stats
-        private StatWindow enemyStatWindow; //Window that shows the stats of the enemy that was last hit
+        private EnemyStatWindow enemyStatWindow; //Window that shows the stats of the enemy that was last hit
         private ControlsWindow controlsWindow; //Window that shows the game controls
         private EventLog eventLogWindow; //Window that shows the event log
 
@@ -29,14 +29,14 @@ namespace TextRPG_V2
             //Instantiate all windows
             gameplayWindow = new Camera(entityManager.GetPlayer());
             playerStatWindow = new StatWindow(entityManager.GetPlayer());
-            enemyStatWindow = new StatWindow(null);
+            enemyStatWindow = new EnemyStatWindow(null);
             controlsWindow = new ControlsWindow();
             eventLogWindow = new EventLog();
 
             //set initial positions of windows
             gameplayPos = new int[2] { 0, 0 };
             playerWinPos = new int[2] { 0, gameplayWindow.GetWidth() + GlobalVariables.windowPadding };
-            enemyWinPos = new int[2] { playerStatWindow.GetHeight() + GlobalVariables.windowPadding, gameplayWindow.GetWidth() + GlobalVariables.windowPadding };
+            enemyWinPos = new int[2] { playerStatWindow.GetHeight(), gameplayWindow.GetWidth() + GlobalVariables.windowPadding };
             controlsPos = new int[2] { 0, gameplayWindow.GetWidth() + playerStatWindow.GetWidth() + 2 * GlobalVariables.windowPadding };
             eventLogPos = new int[2] { gameplayWindow.GetHeight(), 0 };
 

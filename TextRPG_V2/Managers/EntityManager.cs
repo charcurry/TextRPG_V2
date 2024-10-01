@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -124,7 +125,17 @@ namespace TextRPG_V2
             {
                 if (entityTurns[i].entity.health.GetHp() <= 0)
                 {
-                    uIManager.AddEventToLog(entityTurns[i].entity.GetName() + " died.");
+                    if (entityTurns[i].entity.killedByPlayer)
+                    {
+                        int luck = (int)GetPlayer().luc.GetStat() * (int)GlobalVariables.goldLucWeight;
+                        GetPlayer().gld.ModStat(entityTurns[i].entity.gld.GetStat() + luck);
+                        uIManager.AddEventToLog(entityTurns[i].entity.GetName() + " died.");
+                        uIManager.AddEventToLog("Player found " + entityTurns[i].entity.gld.GetStat().ToString() + " gold.");
+                    }
+                    else
+                    {
+                        uIManager.AddEventToLog(entityTurns[i].entity.GetName() + " died.");
+                    }
                     map.RemoveEntity(entityTurns[i].entity);
                     entityTurns.Remove(entityTurns[i]);
                 }

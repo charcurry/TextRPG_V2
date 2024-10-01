@@ -34,6 +34,7 @@ namespace TextRPG_V2
         //Items
         public const int potionHealingValue = 10;
         public const int swordAtkIncrease = 5;
+        public const float goldLucWeight = 0.5f;
         public const int goldValue = 100;
 
 
@@ -53,8 +54,11 @@ namespace TextRPG_V2
         //UIWindows
         public const int windowPadding = 1;
 
-        public const int statWindowHeight = 11;
+        public const int statWindowHeight = 12;
         public const int statWindowWidth = 20;
+
+        public const int enemyStatWindowHeight = 11;
+        public const int enemyStatWindowWidth = 20;
 
         public const int controlsWindowHeight = 23;
         public const int controlsWindowWidth = 22;

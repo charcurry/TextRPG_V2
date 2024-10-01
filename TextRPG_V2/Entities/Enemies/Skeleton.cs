@@ -25,6 +25,7 @@ namespace TextRPG_V2
             spd = new Stat(4);
             skl = new Stat(5);
             luc = new Stat(2);
+            gld = new Stat(5);
         }
 
         /// <summary>
