@@ -11,6 +11,7 @@ namespace TextRPG_V2
         private string name; //name of the item
         private ConsoleColor color; //color of the Item respresentation
         private char symbol; //the graphical representation of the Item
+        public int cost;
 
         /// <summary>
         /// Constructor method for an abstract item object
@@ -21,6 +22,7 @@ namespace TextRPG_V2
             this.name = name;
             color = ConsoleColor.Yellow;
             symbol = '?';
+            cost = 0;
         }
 
         /// <summary>
@@ -39,6 +41,12 @@ namespace TextRPG_V2
         /// <param name="target">The entity that is using the item</param>
         /// <returns>A string for the event log</returns>
         public abstract string Use(Entity target);
+
+        public string Check(Entity target)
+        {
+            string message = target.GetName() + " cannot afford " + GetName() + ". Price: " + cost;
+            return message;
+        }
 
         /// <summary>
         /// Accessor method for the name of the item

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using TextRPG_V2.Items;
+using System.Security.Cryptography;
 
 namespace TextRPG_V2
 {
@@ -53,23 +55,67 @@ namespace TextRPG_V2
         /// Method that initializes an Item from its character input
         /// </summary>
         /// <param name="input">character representing that item to be initialized</param>
+        /// <param name="position">position of item (y, x)</param>
+        /// <param name="map">map object</param>
         /// <returns>Item object that was initialized</returns>
-        public Item InitializeItem(char input)
+        public Item InitializeItem(char input, int[] position, Map map)
         {
+            Item newItem;
+
             switch (input)
             {
                 case 'p':
-                    return new HealingPotion();
-
+                    newItem = new HealingPotion();
+                    break;
                 case 's':
-                    return new Sword();
-
+                    newItem =  new Sword();
+                    break;
                 case 'b':
-                    return new BootsOfSpeed();
-
+                    newItem = new BootsOfSpeed();
+                    break;
                 default:
                     return null;
             }
+
+            if (IsNearShop(position,map))
+            {
+                Random rnd = new Random();
+                newItem.cost = rnd.Next(25, 100); // Sets cost of item
+            }
+
+            return newItem;
+        }
+
+        /// <summary>
+        /// Checks if an item is near a shop tile
+        /// </summary>
+        /// <param name="position">Position of the item</param>
+        /// <param name="map">Map object</param>
+        /// <returns></returns>
+        private bool IsNearShop(int[] position, Map map)
+        {
+            int x = position[1];
+            int y = position[0];
+
+            // Loops through a 3x3 area around it for a shop tile.
+            for (int i = -1; i <= 1; i++)
+            {
+                for (int j = -1; j <= 1; j++)
+                {
+                    int[] checkPos = { y + i, x + j };
+
+                    // Checks if checkPos is within boundaries of map
+                    if (checkPos[0] >= 0 && checkPos[0] < map.GetHeight() && checkPos[1] >= 0 && checkPos[1] < map.GetWidth())
+                    {
+                        Tile tile = map.GetTile(checkPos);
+                        if (tile.GetShop())
+                        {
+                            return true; // Item is near shop
+                        }
+                    }
+                }
+            }
+            return false; // Item is not near shop
         }
     }
 }

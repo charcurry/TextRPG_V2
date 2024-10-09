@@ -131,7 +131,8 @@ namespace TextRPG_V2
             {
                 for (int x = 0; x < width; x++)
                 {
-                    items[y, x] = itemManager.InitializeItem(input[y + startIndex][x]);
+                    int[] position = { y, x };
+                    items[y, x] = itemManager.InitializeItem(input[y + startIndex][x], position, this);
                     itemManager.AddItem(items[y, x]);
                 }
             }

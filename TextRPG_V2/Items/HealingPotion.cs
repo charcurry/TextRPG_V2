@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ namespace TextRPG_V2.Items
         /// <summary>
         /// Empty constructor method for a "Healing Potion" Item.
         /// </summary>
-        public HealingPotion() : base("healing potion")
+        public HealingPotion() : base("Healing Potion")
         {
             healing = GlobalVariables.potionHealingValue;
             SetSymbol('p');
@@ -27,7 +28,7 @@ namespace TextRPG_V2.Items
         /// <returns>message describing the result of using the item</returns>
         public override string Use(Entity target)
         {
-            string message = target.GetName() + " used a " + GetName(); ;
+            string message = target.GetName() + " used a " + GetName();
             int oldHp = target.health.GetHp();
 
             target.health.ModHp(healing);

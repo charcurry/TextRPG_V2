@@ -21,6 +21,7 @@ namespace TextRPG_V2
         private bool hidden;
         private bool magic;
         private int damage;
+        private bool isShop;
 
         /// <summary>
         /// Constructor method for a Tile type object
@@ -41,6 +42,7 @@ namespace TextRPG_V2
              * trap         't'
              * magic trap   'y'
              * exit         '>'
+             * shop         '$'
              */
 
             //switch statement to set the correct values for the tile
@@ -56,6 +58,7 @@ namespace TextRPG_V2
                     hidden = false;
                     magic = false;
                     damage = 0;
+                    isShop = false;
                     break;
 
                 case '/':
@@ -69,6 +72,7 @@ namespace TextRPG_V2
                     hidden = false;
                     magic = false;
                     damage = 0;
+                    isShop = false;
                     break;
 
                 case '.':
@@ -81,6 +85,7 @@ namespace TextRPG_V2
                     hidden = false;
                     magic = false;
                     damage = 0;
+                    isShop = false;
                     break;
 
                 case '-':
@@ -95,6 +100,7 @@ namespace TextRPG_V2
                     hidden = false;
                     magic = false;
                     damage = 0;
+                    isShop = false;
                     break;
 
                 case 'l':
@@ -107,6 +113,7 @@ namespace TextRPG_V2
                     hidden = false;
                     magic = false;
                     damage = 7;
+                    isShop = false;
                     break;
 
                 case 'w':
@@ -119,6 +126,7 @@ namespace TextRPG_V2
                     hidden = false;
                     magic = false;
                     damage = 0;
+                    isShop = false;
                     break;
 
                 case 'd':
@@ -131,6 +139,7 @@ namespace TextRPG_V2
                     hidden = false;
                     magic = false;
                     damage = 0;
+                    isShop = false;
                     break;
 
                 case 'f':
@@ -143,6 +152,7 @@ namespace TextRPG_V2
                     hidden = false;
                     magic = false;
                     damage = 10;
+                    isShop = false;
                     break;
 
                 case 't':
@@ -155,6 +165,7 @@ namespace TextRPG_V2
                     hidden = true;
                     magic = false;
                     damage = 7;
+                    isShop = false;
                     break;
 
                 case 'y':
@@ -167,6 +178,7 @@ namespace TextRPG_V2
                     hidden = true;
                     magic = false;
                     damage = 7;
+                    isShop = false;
                     break;
 
                 case '>':
@@ -179,6 +191,19 @@ namespace TextRPG_V2
                     hidden = false;
                     magic = false;
                     damage = 0;
+                    isShop = false;
+                    break;
+                case '$':
+                    symbol = '$';
+                    name = "shop";
+                    color = ConsoleColor.Green;
+                    impassable = true;
+                    dangerous = false;
+                    exit = false;
+                    hidden = false;
+                    magic = false;
+                    damage = 0;
+                    isShop = true;
                     break;
             }
         }
@@ -350,5 +375,22 @@ namespace TextRPG_V2
             this.damage = damage;
         }
 
+        /// <summary>
+        /// Sets tiles to be a shop tile
+        /// </summary>
+        /// <param name="isShop">if the tile is a shop</param>
+        public void SetShop(bool isShop)
+        {
+            this.isShop = isShop;
+        }
+
+        /// <summary>
+        /// Gets the shop state of the tile
+        /// </summary>
+        /// <returns>the shop state of the tile</returns>
+        public bool GetShop()
+        {
+            return isShop;
+        }
     }
 }

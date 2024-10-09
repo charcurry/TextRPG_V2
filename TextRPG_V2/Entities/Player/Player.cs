@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -126,10 +127,33 @@ namespace TextRPG_V2
             //uses item if item is available
             else if (map.GetItem(endPos) != null)
             {
-                string message = map.GetItem(endPos).Use(this);
-                itemManager.RemoveItem(map.GetItem(endPos));
-                map.RemoveItem(endPos);
-                return message;
+                if (gld.GetStat() < map.GetItem(endPos).cost && map.GetItem(endPos).cost > 0)
+                {
+                    Debug.WriteLine(gld.GetStat());
+                    Debug.WriteLine(map.GetItem(endPos).cost);
+                    string message = map.GetItem(endPos).Check(this);
+                    return message;
+                }
+                else if (gld.GetStat() > map.GetItem(endPos).cost && map.GetItem(endPos).cost > 0)
+                {
+                    Debug.WriteLine(gld.GetStat());
+                    Debug.WriteLine(map.GetItem(endPos).cost);
+                    gld.ModStat(-map.GetItem(endPos).cost);
+                    // Add purchased message
+                    string message = map.GetItem(endPos).Use(this);
+                    itemManager.RemoveItem(map.GetItem(endPos));
+                    map.RemoveItem(endPos);
+                    return message;
+                }
+                else
+                {
+                    Debug.WriteLine(gld.GetStat());
+                    Debug.WriteLine(map.GetItem(endPos).cost);
+                    string message = map.GetItem(endPos).Use(this);
+                    itemManager.RemoveItem(map.GetItem(endPos));
+                    map.RemoveItem(endPos);
+                    return message;
+                }
             }
 
             //check if Tile is impassableS
