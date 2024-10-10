@@ -74,12 +74,12 @@ namespace TextRPG_V2
                     newItem = new BootsOfSpeed();
                     break;
                 default:
-                    return null;
+                    return null; 
             }
 
             if (IsNearShop(position,map))
             {
-                Random rnd = new Random();
+                Random rnd = new Random(newItem.costSeed + Environment.TickCount);
                 newItem.cost = rnd.Next(25, 100); // Sets cost of item
             }
 

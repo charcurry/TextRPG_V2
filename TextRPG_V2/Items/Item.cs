@@ -13,6 +13,8 @@ namespace TextRPG_V2
         private char symbol; //the graphical representation of the Item
         public int cost;
 
+        public int costSeed;
+
         /// <summary>
         /// Constructor method for an abstract item object
         /// </summary>

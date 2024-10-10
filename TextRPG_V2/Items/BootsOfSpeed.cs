@@ -15,6 +15,7 @@ namespace TextRPG_V2
         {
             SetSymbol('b');
             SetColor(ConsoleColor.DarkCyan);
+            costSeed = 867;
         }
 
         /// <summary>

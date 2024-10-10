@@ -19,6 +19,7 @@ namespace TextRPG_V2.Items
             healing = GlobalVariables.potionHealingValue;
             SetSymbol('p');
             SetColor(ConsoleColor.Green);
+            costSeed = 432;
         }
 
         /// <summary>
