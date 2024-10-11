@@ -77,10 +77,11 @@ namespace TextRPG_V2
                     return null; 
             }
 
+            // Gives the item a cost if it is near the shop
             if (IsNearShop(position,map))
             {
                 Random rnd = new Random(newItem.costSeed + Environment.TickCount);
-                newItem.cost = rnd.Next(25, 100); // Sets cost of item
+                newItem.cost = rnd.Next(20, 50); // Sets cost of item
             }
 
             return newItem;

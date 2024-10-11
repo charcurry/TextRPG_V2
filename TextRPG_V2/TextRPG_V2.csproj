@@ -59,6 +59,7 @@
     <Compile Include="Managers\EntityManager.cs" />
     <Compile Include="Managers\GameManager.cs" />
     <Compile Include="Managers\ItemManager.cs" />
+    <Compile Include="Managers\QuestManager.cs" />
     <Compile Include="Managers\UIManager.cs" />
     <Compile Include="Maps\Map.cs" />
     <Compile Include="Maps\Tile.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="UIElements\ControlsWindow.cs" />
     <Compile Include="UIElements\EnemyStatWindow.cs" />
     <Compile Include="UIElements\EventLog.cs" />
+    <Compile Include="UIElements\QuestsWindow.cs" />
     <Compile Include="UIElements\StatWindow.cs" />
     <Compile Include="UIElements\UIWindow.cs" />
   </ItemGroup>

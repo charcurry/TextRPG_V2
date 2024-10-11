@@ -60,8 +60,11 @@ namespace TextRPG_V2
         public const int enemyStatWindowHeight = 11;
         public const int enemyStatWindowWidth = 20;
 
-        public const int controlsWindowHeight = 23;
+        public const int controlsWindowHeight = 12;
         public const int controlsWindowWidth = 22;
+
+        public const int questsWindowHeight = 11;
+        public const int questsWindowWidth = 22;
 
         public const int EventLogWindowHeight = 12;
         public const int EventLogWindowWidth = 77;

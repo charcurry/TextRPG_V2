@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TextRPG_V2.UIElements;
 
 namespace TextRPG_V2
 {
@@ -12,12 +13,14 @@ namespace TextRPG_V2
         private StatWindow playerStatWindow; //Window that shows the player's stats
         private EnemyStatWindow enemyStatWindow; //Window that shows the stats of the enemy that was last hit
         private ControlsWindow controlsWindow; //Window that shows the game controls
+        private QuestsWindow questsWindow;
         private EventLog eventLogWindow; //Window that shows the event log
 
         private int[] gameplayPos; //The position on the screen of the gameplay
         private int[] playerWinPos; //The position on the screen of the player stat window
         private int[] enemyWinPos; //The position on the screen of the enemy stat window
         private int[] controlsPos; //The position on the screen of the controls window
+        private int[] questsPos; // The position on the screen of the quests window
         private int[] eventLogPos; //The position on the screen of the event log
 
         /// <summary>
@@ -31,6 +34,7 @@ namespace TextRPG_V2
             playerStatWindow = new StatWindow(entityManager.GetPlayer());
             enemyStatWindow = new EnemyStatWindow(null);
             controlsWindow = new ControlsWindow();
+            questsWindow = new QuestsWindow();
             eventLogWindow = new EventLog();
 
             //set initial positions of windows
@@ -38,6 +42,7 @@ namespace TextRPG_V2
             playerWinPos = new int[2] { 0, gameplayWindow.GetWidth() + GlobalVariables.windowPadding };
             enemyWinPos = new int[2] { playerStatWindow.GetHeight(), gameplayWindow.GetWidth() + GlobalVariables.windowPadding };
             controlsPos = new int[2] { 0, gameplayWindow.GetWidth() + playerStatWindow.GetWidth() + 2 * GlobalVariables.windowPadding };
+            questsPos = new int[2] { controlsWindow.GetHeight(), gameplayWindow.GetWidth() + enemyStatWindow.GetWidth() + 2 * GlobalVariables.windowPadding };
             eventLogPos = new int[2] { gameplayWindow.GetHeight(), 0 };
 
             //calculate the total width and height of the UI windows
@@ -63,6 +68,7 @@ namespace TextRPG_V2
             playerStatWindow.printWindow(playerWinPos);
             enemyStatWindow.printWindow(enemyWinPos);
             controlsWindow.printWindow(controlsPos);
+            questsWindow.printWindow(questsPos);
             eventLogWindow.printWindow(eventLogPos);
         }
 
