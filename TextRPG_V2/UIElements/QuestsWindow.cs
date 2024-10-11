@@ -15,25 +15,14 @@ namespace TextRPG_V2.UIElements
         public QuestsWindow() : base(GlobalVariables.questsWindowWidth, GlobalVariables.questsWindowHeight)
         {
             questManager = new QuestManager();
-
+            questManager.CreateQuests();
             
-            base.AddLine(1, "Quest 1:");
-            base.AddLine(2, "Defeat 10 Enemies");
-            base.AddLine(4, "Quest 2:");
-            base.AddLine(5, "Buy 3 Items");
-            base.AddLine(7, "Quest 3:");
-            base.AddLine(8, "Escape the Dungeon");
-        }
-
-        public void CreateQuests()
-        {
-            Quest quest1 = new Quest("Quest 1:", "Defeat 10 Enemies");
-            Quest quest2 = new Quest("Quest 2:", "Buy 3 Items");
-            Quest quest3 = new Quest("Quest 3:", "Escape the Dungeon");
-
-            questManager.AddQuest(quest1);
-            questManager.AddQuest(quest2);
-            questManager.AddQuest(quest3);
+            base.AddLine(1, questManager.GetActiveQuests()[0].name);
+            base.AddLine(2, questManager.GetActiveQuests()[0].description);
+            base.AddLine(4, questManager.GetActiveQuests()[1].name);
+            base.AddLine(5, questManager.GetActiveQuests()[1].description);
+            base.AddLine(7, questManager.GetActiveQuests()[2].name);
+            base.AddLine(8, questManager.GetActiveQuests()[2].description);
         }
     }
 }

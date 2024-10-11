@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TextRPG_V2.Managers;
 
-namespace TextRPG_V2.Managers
+namespace TextRPG_V2
 {
-    internal class QuestManager
+    public class QuestManager
     {
         private List<Quest> activeQuests = new List<Quest>();
 
@@ -44,6 +45,17 @@ namespace TextRPG_V2.Managers
         public List<Quest> GetActiveQuests()
         {
             return activeQuests.Where(i => !i.CheckCompletion()).ToList();
+        }
+
+        public void CreateQuests()
+        {
+            Quest quest1 = new Quest("Quest 1:", "Defeat 10 Enemies", Quest.QuestType.KillEnemies, false, 10);
+            Quest quest2 = new Quest("Quest 2:", "Buy 3 Items", Quest.QuestType.AcquireItems, false, 3);
+            Quest quest3 = new Quest("Quest 3:", "Escape the Dungeon", Quest.QuestType.DoTask, true);
+
+            AddQuest(quest1);
+            AddQuest(quest2);
+            AddQuest(quest3);
         }
     }
 }

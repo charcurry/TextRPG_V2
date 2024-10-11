@@ -6,17 +6,42 @@ using System.Threading.Tasks;
 
 namespace TextRPG_V2.Managers
 {
-    internal class Quest
+    public class Quest
     {
-        string name;
-        string description;
+        public string name;
+        public string description;
         bool isCompleted;
 
-        public Quest(string name, string description)
+        bool doTask;
+
+        int numThingsRequired;
+
+        public enum QuestType
+        {
+            AcquireItems,
+            KillEnemies,
+            DoTask
+        }
+
+        public QuestType questType;
+
+        public Quest(string name, string description, QuestType questType, bool doTask = false, int numThingsRequired = 0)
         {
             this.name = name;
             this.description = description;
             isCompleted = false;
+
+            if (questType == QuestType.DoTask)
+            {
+                this.doTask = doTask;
+            }
+            else if (questType != QuestType.DoTask)
+            {
+                if (numThingsRequired != 0)
+                {
+                    this.numThingsRequired = numThingsRequired;
+                }
+            }
         }
 
         public bool CheckCompletion()

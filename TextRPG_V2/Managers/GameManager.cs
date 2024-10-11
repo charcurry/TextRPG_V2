@@ -13,6 +13,7 @@ namespace TextRPG_V2
         UIManager uiManager; //The Object that manages UI elements (Camera, action log, controls, etc...) 
         EntityManager entityManager; //The object that managed entities
         ItemManager itemManager; //object that manages items
+        QuestManager questManager;
 
         private bool gameWin; //bool tracking if the game was won
         private bool gameLose; //bool tracking if the game was lost
@@ -43,6 +44,9 @@ namespace TextRPG_V2
 
             //initializing UI
             uiManager = new UIManager(entityManager);
+
+            //initializing quest manager
+            questManager = new QuestManager();
 
             //title screen
             TitleScreen();
