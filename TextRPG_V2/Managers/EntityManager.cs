@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TextRPG_V2.Managers;
 
 namespace TextRPG_V2
 {
@@ -12,7 +13,8 @@ namespace TextRPG_V2
     {
         //list of entity turns (entities and their ability to take turns) on the map
         private List<EntityTurn> entityTurns;
-        
+        //private QuestManager questManager;
+
         /// <summary>
         /// Constructor method for an Entity Manager
         /// </summary>
@@ -84,11 +86,11 @@ namespace TextRPG_V2
         /// <param name="uIManager">the manager for the game UI</param>
         /// <param name="itemManager">the manager for the items on the map</param>
         /// <returns></returns>
-        public bool UpdateEntities(Map map, UIManager uIManager, ItemManager itemManager)
+        public bool UpdateEntities(Map map, UIManager uIManager, ItemManager itemManager, QuestManager questManager)
         {
             for (int i = 0; i < entityTurns.Count; i++)
             {
-                if (entityTurns[i].Update(map, uIManager, itemManager, this))
+                if (entityTurns[i].Update(map, uIManager, itemManager, this, questManager))
                 {
                     return true;
                 }
@@ -119,7 +121,7 @@ namespace TextRPG_V2
         /// </summary>
         /// <param name="map"></param>
         /// <param name="uIManager"></param>
-        public void CheckDeadEntities(Map map, UIManager uIManager)
+        public void CheckDeadEntities(Map map, UIManager uIManager, QuestManager questManager)
         {
             for(int i=0; i<entityTurns.Count; i++)
             {
@@ -131,6 +133,23 @@ namespace TextRPG_V2
                         GetPlayer().gld.ModStat(entityTurns[i].entity.gld.GetStat() + luck);
                         uIManager.AddEventToLog(entityTurns[i].entity.GetName() + " died.");
                         uIManager.AddEventToLog("Player found " + entityTurns[i].entity.gld.GetStat().ToString() + " gold.");
+
+                        foreach (Quest quest in questManager.GetActiveQuests())
+                        {
+                            if (quest.questType == Quest.QuestType.KillEnemies)
+                            {
+                                quest.numThingsDone += 1;
+                                uIManager.AddEventToLog("Quest: " + quest.name + " has " + (quest.maxNumThingsRequired - quest.numThingsDone) + " enemies left.");
+                            }
+                            if (quest.numThingsDone == quest.maxNumThingsRequired)
+                            {
+                                quest.isCompleted = true;
+                                uIManager.AddEventToLog("Quest: " + quest.name + " is completed ✓.");
+                            }
+                            break;
+                        }
+                        //questManager.GetActiveQuests()[0].numThingsRequired -= 1;
+                        //Debug.WriteLine(questManager.GetActiveQuests()[0].numThingsRequired);
                     }
                     else
                     {

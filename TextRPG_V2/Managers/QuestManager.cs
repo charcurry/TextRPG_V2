@@ -14,6 +14,7 @@ namespace TextRPG_V2
         public QuestManager()
         {
             activeQuests = new List<Quest>();
+            CreateQuests();
         }
 
         public void AddQuest(Quest quest)
@@ -49,9 +50,9 @@ namespace TextRPG_V2
 
         public void CreateQuests()
         {
-            Quest quest1 = new Quest("Quest 1:", "Defeat 10 Enemies", Quest.QuestType.KillEnemies, false, 10);
-            Quest quest2 = new Quest("Quest 2:", "Buy 3 Items", Quest.QuestType.AcquireItems, false, 3);
-            Quest quest3 = new Quest("Quest 3:", "Escape the Dungeon", Quest.QuestType.DoTask, true);
+            Quest quest1 = new Quest("Quest 1:", "Defeat 10 Enemies", Quest.QuestType.KillEnemies, 0, 10);
+            Quest quest2 = new Quest("Quest 2:", "Buy 3 Items", Quest.QuestType.AcquireItems, 0, 3);
+            Quest quest3 = new Quest("Quest 3:", "Escape the Dungeon", Quest.QuestType.DoTask, 0, 0);
 
             AddQuest(quest1);
             AddQuest(quest2);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -42,11 +43,14 @@ namespace TextRPG_V2
             //loading in map from the file path
             map = new Map(path, entityManager, itemManager);
 
-            //initializing UI
-            uiManager = new UIManager(entityManager);
-
             //initializing quest manager
             questManager = new QuestManager();
+            //questManager.CreateQuests();
+
+            Debug.WriteLine(questManager.GetActiveQuests()[0].maxNumThingsRequired);
+
+            //initializing UI
+            uiManager = new UIManager(entityManager, questManager);
 
             //title screen
             TitleScreen();
@@ -67,7 +71,7 @@ namespace TextRPG_V2
             while (!gameLose && !gameWin)
             {
                 //updates the entities and checks if the game was won
-                gameWin = entityManager.UpdateEntities(map, uiManager, itemManager);
+                gameWin = entityManager.UpdateEntities(map, uiManager, itemManager, questManager);
                 
                 //updates the items
                 itemManager.UpdateItems();

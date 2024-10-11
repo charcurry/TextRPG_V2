@@ -30,7 +30,7 @@ namespace TextRPG_V2
         /// <param name="itemManager">the manager for the items on the map</param>
         /// <param name="entityManager">the manager for entities on the map</param>
         /// <returns>bool returning if game is ending</returns>
-        public bool Update(Map map, UIManager uIManager, ItemManager itemManager, EntityManager entityManager)
+        public bool Update(Map map, UIManager uIManager, ItemManager itemManager, EntityManager entityManager, QuestManager questManager)
         {
             //adding speed to build up the Entity's turn
             turnBuildup += entity.spd.GetStat();
@@ -59,7 +59,7 @@ namespace TextRPG_V2
                 }
 
                 //gets the entity manager to check for dead enemies
-                entityManager.CheckDeadEntities(map, uIManager);
+                entityManager.CheckDeadEntities(map, uIManager, questManager);
             }
 
             return false;

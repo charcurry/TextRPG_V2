@@ -10,11 +10,12 @@ namespace TextRPG_V2.Managers
     {
         public string name;
         public string description;
-        bool isCompleted;
+        public bool isCompleted;
 
-        bool doTask;
+        //bool doTask;
 
-        int numThingsRequired;
+        public int numThingsDone;
+        public int maxNumThingsRequired;
 
         public enum QuestType
         {
@@ -25,23 +26,14 @@ namespace TextRPG_V2.Managers
 
         public QuestType questType;
 
-        public Quest(string name, string description, QuestType questType, bool doTask = false, int numThingsRequired = 0)
+        public Quest(string name, string description, QuestType questType, int numThingsDone, int maxNumThingsRequired)
         {
+            this.questType = questType;
             this.name = name;
             this.description = description;
+            this.maxNumThingsRequired = maxNumThingsRequired;
+            this.numThingsDone = numThingsDone;
             isCompleted = false;
-
-            if (questType == QuestType.DoTask)
-            {
-                this.doTask = doTask;
-            }
-            else if (questType != QuestType.DoTask)
-            {
-                if (numThingsRequired != 0)
-                {
-                    this.numThingsRequired = numThingsRequired;
-                }
-            }
         }
 
         public bool CheckCompletion()
