@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -10,22 +11,43 @@ namespace TextRPG_V2.UIElements
 {
     internal class QuestsWindow : UIWindow
     {
-        //private QuestManager questManager;
+        private readonly QuestManager questManager;
 
+        /// <summary>
+        /// Quests window constructor
+        /// </summary>
+        /// <param name="questManager">The quest manager that stores and deals with the quests</param>
 
         public QuestsWindow(QuestManager questManager) : base(GlobalVariables.questsWindowWidth, GlobalVariables.questsWindowHeight)
         {
-            //this.questManager = questManager;
-            
-            base.AddLine(1, questManager.GetActiveQuests()[0].name);
-            base.AddLine(2, questManager.GetActiveQuests()[0].description);
-            base.AddLine(3, questManager.GetActiveQuests()[0].numThingsDone + "/" + questManager.GetActiveQuests()[0].maxNumThingsRequired);
-            base.AddLine(4, questManager.GetActiveQuests()[1].name);
-            base.AddLine(5, questManager.GetActiveQuests()[1].description);
-            base.AddLine(6, questManager.GetActiveQuests()[1].numThingsDone + "/" + questManager.GetActiveQuests()[1].maxNumThingsRequired);
-            Debug.WriteLine(questManager.GetActiveQuests()[1].name + questManager.GetActiveQuests()[1].maxNumThingsRequired);
-            base.AddLine(7, questManager.GetActiveQuests()[2].name);
-            base.AddLine(8, questManager.GetActiveQuests()[2].description);
+            this.questManager = questManager;
+        }
+
+        /// <summary>
+        /// Updates quests status' so they show up in the quest window
+        /// </summary>
+        public void UpdateQuests()
+        {
+            if (questManager.GetAllQuests().Count == 0)
+            {
+                base.AddLine(1, "No Active Quests");
+                return;
+            }
+
+            int i = 1;
+            foreach (Quest quest in questManager.GetAllQuests())
+            {
+                base.AddLine(i, quest.name);
+                base.AddLine(i + 1, quest.description + (quest.isCompleted ? " ✓" : ""));
+
+                if (quest.questType != Quest.QuestType.FindExit)
+                {
+                    base.AddLine(i + 2, quest.numThingsDone + "/" + quest.maxNumThingsRequired);
+                }
+
+                // Adding 3 leaves enough of a gap between quests so they dont overwrite each other
+                i += 3;
+            }
         }
     }
 }

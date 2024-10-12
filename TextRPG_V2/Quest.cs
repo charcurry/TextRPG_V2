@@ -19,13 +19,21 @@ namespace TextRPG_V2.Managers
 
         public enum QuestType
         {
-            AcquireItems,
+            PurchaseItems,
             KillEnemies,
-            DoTask
+            FindExit
         }
 
         public QuestType questType;
 
+        /// <summary>
+        /// Quest constructor
+        /// </summary>
+        /// <param name="name">name of quest</param>
+        /// <param name="description">description of quest</param>
+        /// <param name="questType">type of quest</param>
+        /// <param name="numThingsDone">progress on quest</param>
+        /// <param name="maxNumThingsRequired">max required progress on quest</param>
         public Quest(string name, string description, QuestType questType, int numThingsDone, int maxNumThingsRequired)
         {
             this.questType = questType;
@@ -36,6 +44,10 @@ namespace TextRPG_V2.Managers
             isCompleted = false;
         }
 
+        /// <summary>
+        /// Checks for quest completion
+        /// </summary>
+        /// <returns>the completion status of the quest</returns>
         public bool CheckCompletion()
         {
             return isCompleted;

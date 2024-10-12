@@ -45,9 +45,8 @@ namespace TextRPG_V2
 
             //initializing quest manager
             questManager = new QuestManager();
-            //questManager.CreateQuests();
 
-            Debug.WriteLine(questManager.GetActiveQuests()[0].maxNumThingsRequired);
+            Debug.WriteLine(questManager.GetAllQuests()[0].maxNumThingsRequired);
 
             //initializing UI
             uiManager = new UIManager(entityManager, questManager);

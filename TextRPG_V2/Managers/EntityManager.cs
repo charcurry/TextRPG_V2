@@ -79,6 +79,8 @@ namespace TextRPG_V2
             }
         }
 
+        bool playerPreviouslyOnExit = false;
+
         /// <summary>
         /// Method that instructs the EntityManager to update all entities in the EntityTurn list.
         /// </summary>
@@ -88,12 +90,34 @@ namespace TextRPG_V2
         /// <returns></returns>
         public bool UpdateEntities(Map map, UIManager uIManager, ItemManager itemManager, QuestManager questManager)
         {
+
             for (int i = 0; i < entityTurns.Count; i++)
             {
                 if (entityTurns[i].Update(map, uIManager, itemManager, this, questManager))
                 {
                     return true;
                 }
+            }
+
+            bool playerOnExit = map.GetTile(map.GetEntityIndex(GetPlayer())).GetExit(); // Check if player is on exit
+
+            if (playerOnExit && !playerPreviouslyOnExit)
+            {
+                // Player has stepped on the exit tile
+                if (questManager.GetCompletedQuests().Count != questManager.GetAllQuests().Count() - 1)
+                {
+                    uIManager.AddEventToLog("Cannot exit unless all other quests are completed");
+                }
+                else
+                {
+                    return true; // Game win condition met
+                }
+
+                playerPreviouslyOnExit = true;
+            }
+            else if (!playerOnExit && playerPreviouslyOnExit)
+            {
+                playerPreviouslyOnExit = false;
             }
 
             return false;
@@ -133,23 +157,7 @@ namespace TextRPG_V2
                         GetPlayer().gld.ModStat(entityTurns[i].entity.gld.GetStat() + luck);
                         uIManager.AddEventToLog(entityTurns[i].entity.GetName() + " died.");
                         uIManager.AddEventToLog("Player found " + entityTurns[i].entity.gld.GetStat().ToString() + " gold.");
-
-                        foreach (Quest quest in questManager.GetActiveQuests())
-                        {
-                            if (quest.questType == Quest.QuestType.KillEnemies)
-                            {
-                                quest.numThingsDone += 1;
-                                uIManager.AddEventToLog("Quest: " + quest.name + " has " + (quest.maxNumThingsRequired - quest.numThingsDone) + " enemies left.");
-                            }
-                            if (quest.numThingsDone == quest.maxNumThingsRequired)
-                            {
-                                quest.isCompleted = true;
-                                uIManager.AddEventToLog("Quest: " + quest.name + " is completed ✓.");
-                            }
-                            break;
-                        }
-                        //questManager.GetActiveQuests()[0].numThingsRequired -= 1;
-                        //Debug.WriteLine(questManager.GetActiveQuests()[0].numThingsRequired);
+                        questManager.UpdateReleventQuest(uIManager, Quest.QuestType.KillEnemies);
                     }
                     else
                     {

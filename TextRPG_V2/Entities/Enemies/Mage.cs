@@ -40,7 +40,7 @@ namespace TextRPG_V2
         /// <param name="uiManager">The manager for UI class objects</param>
         /// <param name="itemManager">The manager for Item class objects</param>
         /// <returns>String containing a description of the action</returns>
-        public override string ChooseAction(Map map, int[] startPos, UIManager uiManager, ItemManager itemManager)
+        public override string ChooseAction(Map map, int[] startPos, UIManager uiManager, ItemManager itemManager, QuestManager questManager)
         {
             //checking range for target
             for (int y = -range; y<= range; y++)
@@ -57,7 +57,7 @@ namespace TextRPG_V2
                             int[] index = new int[] { startPos[0] + y, startPos[1] + x };
                             if (map.GetEntity(index) != null && map.GetEntity(index).GetFaction() != GetFaction())
                             {
-                                return Move(map, startPos, index, uiManager, itemManager);
+                                return Move(map, startPos, index, uiManager, itemManager, questManager);
                             }
                         }
                     }
@@ -102,7 +102,7 @@ namespace TextRPG_V2
             }
 
             //move
-            return Move(map, startPos, endPos, uiManager, itemManager);
+            return Move(map, startPos, endPos, uiManager, itemManager, questManager);
         }
     }
 }

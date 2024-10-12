@@ -63,6 +63,7 @@ namespace TextRPG_V2
         {
             playerStatWindow.SetTargetInfo();
             enemyStatWindow.SetTargetInfo();
+            questsWindow.UpdateQuests();
 
             gameplayWindow.DrawGamePlay(map, gameplayPos[0], gameplayPos[1]);
             playerStatWindow.printWindow(playerWinPos);

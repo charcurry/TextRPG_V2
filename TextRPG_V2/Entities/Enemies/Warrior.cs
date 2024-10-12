@@ -51,7 +51,7 @@ namespace TextRPG_V2
         /// <param name="itemManager">The manager for UI class objects</param>
         /// <param name="uiManager">The manager for Item class objects</param>
         /// <returns>String containing a description of the action</returns>
-        public override string ChooseAction(Map map, int[] startPos, UIManager uiManager, ItemManager itemManager)
+        public override string ChooseAction(Map map, int[] startPos, UIManager uiManager, ItemManager itemManager, QuestManager questManager)
         {
             bool foundDirection = false;
             int[] endPos = new int[2];
@@ -64,19 +64,19 @@ namespace TextRPG_V2
             //checks for entities
             if (map.GetEntity(posSouth) != null)
             {
-                return Move(map, startPos, posSouth, uiManager, itemManager);
+                return Move(map, startPos, posSouth, uiManager, itemManager, questManager);
             }
             else if (map.GetEntity(posWest) != null)
             {
-                return Move(map, startPos, posWest, uiManager, itemManager);
+                return Move(map, startPos, posWest, uiManager, itemManager, questManager);
             }
             else if (map.GetEntity(posNorth) != null)
             {
-                return Move(map, startPos, posNorth, uiManager, itemManager);
+                return Move(map, startPos, posNorth, uiManager, itemManager, questManager);
             }
             else if (map.GetEntity(posEast) != null)
             {
-                return Move(map, startPos, posEast, uiManager, itemManager);
+                return Move(map, startPos, posEast, uiManager, itemManager, questManager);
             }
 
             while (!foundDirection)
@@ -138,7 +138,7 @@ namespace TextRPG_V2
                 }
             }
 
-            return Move(map, startPos, endPos, uiManager, itemManager);
+            return Move(map, startPos, endPos, uiManager, itemManager, questManager);
         }
 
         /// <summary>

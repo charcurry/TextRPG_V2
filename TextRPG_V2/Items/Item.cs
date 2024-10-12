@@ -50,6 +50,12 @@ namespace TextRPG_V2
             return message;
         }
 
+        public string Purchase(Entity target)
+        {
+            string message = target.GetName() + " has purchased and used " + GetName() + " for " + cost + " gold.";
+            return message;
+        }
+
         /// <summary>
         /// Accessor method for the name of the item
         /// </summary>

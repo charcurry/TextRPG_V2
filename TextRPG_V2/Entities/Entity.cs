@@ -111,7 +111,7 @@ namespace TextRPG_V2
         /// <param name="uiManager">The manager for UI class objects</param>
         /// <param name="itemManager">The manager for Item class objects</param>
         /// <returns>String containing a description of the action</returns>
-        public abstract string ChooseAction(Map map, int[] startPos, UIManager uiManager, ItemManager itemManager);
+        public abstract string ChooseAction(Map map, int[] startPos, UIManager uiManager, ItemManager itemManager, QuestManager questManager);
 
         /// <summary>
         /// Method to have entity take a move action
@@ -122,7 +122,7 @@ namespace TextRPG_V2
         /// <param name="uiManager">The manager for UI class objects</param>
         /// <param name="itemManager">he manager for Item class objects</param>
         /// <returns>String containing a result of the move action</returns>
-        public string Move(Map map, int[] startPos, int[] endPos, UIManager uiManager, ItemManager itemManager)
+        public string Move(Map map, int[] startPos, int[] endPos, UIManager uiManager, ItemManager itemManager, QuestManager questManager)
         {
             //check desired position if within bounds of map
             if (endPos[0] < 0 || endPos[0] >= map.GetHeight() || endPos[1] < 0 || endPos[1] >= map.GetWidth())

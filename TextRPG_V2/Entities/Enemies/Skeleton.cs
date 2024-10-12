@@ -36,7 +36,7 @@ namespace TextRPG_V2
         /// <param name="uiManager">The manager for UI class objects</param>
         /// <param name="itemManager">The manager for Item class objects</param>
         /// <returns>String containing a description of the action</returns>
-        public override string ChooseAction(Map map, int[] startPos, UIManager uiManager, ItemManager itemManager)
+        public override string ChooseAction(Map map, int[] startPos, UIManager uiManager, ItemManager itemManager, QuestManager questManager)
         {
             //check move right
             if (moveRight)
@@ -50,12 +50,12 @@ namespace TextRPG_V2
                     int[] leftPos = { startPos[0], startPos[1] - 1 };
 
                     //attempt move left
-                    return Move(map, startPos, leftPos, uiManager, itemManager);
+                    return Move(map, startPos, leftPos, uiManager, itemManager, questManager);
                 }
                 else
                 {
                     //attempt move right
-                    return Move(map, startPos, rightPos, uiManager, itemManager);
+                    return Move(map, startPos, rightPos, uiManager, itemManager, questManager);
                 }
             }
             //check move left
@@ -70,12 +70,12 @@ namespace TextRPG_V2
                     int[] rightPos = { startPos[0], startPos[1] + 1 };
 
                     //attempt move right
-                    return Move(map, startPos, rightPos, uiManager, itemManager);
+                    return Move(map, startPos, rightPos, uiManager, itemManager, questManager);
                 }
                 else
                 {
                     //attempt move left
-                    return Move(map, startPos, leftPos, uiManager, itemManager);
+                    return Move(map, startPos, leftPos, uiManager, itemManager, questManager);
                 }
             }
         }

@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using TextRPG_V2.Managers;
 
 namespace TextRPG_V2
 {
@@ -40,7 +42,7 @@ namespace TextRPG_V2
         /// <param name="uiManager">The manager for UI class objects</param>
         /// <param name="itemManager">The manager for Item class objects</param>
         /// <returns>String containing a description of the action</returns>
-        public override string ChooseAction(Map map, int[] startPos, UIManager uiManager, ItemManager itemManager)
+        public override string ChooseAction(Map map, int[] startPos, UIManager uiManager, ItemManager itemManager, QuestManager questManager)
         {
             //declaring variables
             int[] endPos = { startPos[0], startPos[1] };
@@ -97,7 +99,7 @@ namespace TextRPG_V2
                 }
             }
 
-            return Move(map, startPos, endPos, uiManager, itemManager);
+            return Move(map, startPos, endPos, uiManager, itemManager, questManager);
         }
 
         /// <summary>
@@ -108,8 +110,9 @@ namespace TextRPG_V2
         /// <param name="endPos">The position at which the player will end their turn</param>
         /// <param name="uIManager">The manager for UI class objects</param>
         /// <param name="itemManager">The manager for Item class objects</param>
+        /// <param name="questManager">The manager for Quest class objects</param>
         /// <returns>String containing a description of the action</returns>
-        new public string Move(Map map, int[] startPos, int[] endPos, UIManager uIManager, ItemManager itemManager)
+        new public string Move(Map map, int[] startPos, int[] endPos, UIManager uIManager, ItemManager itemManager, QuestManager questManager)
         {
             //check desired position if within bounds of map
             if (endPos[0] < 0 || endPos[0] >= map.GetHeight() || endPos[1] < 0 || endPos[1] >= map.GetWidth())
@@ -136,14 +139,16 @@ namespace TextRPG_V2
                 }
                 else if (gld.GetStat() > map.GetItem(endPos).cost && map.GetItem(endPos).cost > 0)
                 {
-                    Debug.WriteLine(gld.GetStat());
-                    Debug.WriteLine(map.GetItem(endPos).cost);
+                    //Debug.WriteLine(gld.GetStat());
+                    //Debug.WriteLine(map.GetItem(endPos).cost);
                     gld.ModStat(-map.GetItem(endPos).cost);
-                    // Add purchased message
-                    string message = map.GetItem(endPos).Use(this);
+                    string purchaseMessage = map.GetItem(endPos).Purchase(this);
+                    Debug.WriteLine(questManager.GetActiveQuests().Count());
+                    questManager.UpdateReleventQuest(uIManager, Quest.QuestType.PurchaseItems);
+                    map.GetItem(endPos).Use(this);
                     itemManager.RemoveItem(map.GetItem(endPos));
                     map.RemoveItem(endPos);
-                    return message;
+                    return purchaseMessage;
                 }
                 else
                 {

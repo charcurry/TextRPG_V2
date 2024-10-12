@@ -43,14 +43,8 @@ namespace TextRPG_V2
                     uIManager.DrawUI(map);
                 }
 
-                //checks if player is standing on the exit tile
-                if (map.GetTile(map.GetEntityIndex(entityManager.GetPlayer())).GetExit())
-                {
-                    return true;
-                }
-
                 //adds events of the turn to the log (if the events were notable)
-                uIManager.AddEventToLog(TakeAction(map, uIManager, itemManager));
+                uIManager.AddEventToLog(TakeAction(map, uIManager, itemManager, questManager));
 
                 //check if entity takes damage from tile
                 if (map.GetTile(map.GetEntityIndex(entity)).GetDangerous())
@@ -73,10 +67,10 @@ namespace TextRPG_V2
         /// <param name="uIManager">the manager for the game UI</param>
         /// <param name="itemManager">the manager for the items on the map</param>
         /// <returns>Description of the action taken</returns>
-        private string TakeAction(Map map, UIManager uIManager, ItemManager itemManager)
+        private string TakeAction(Map map, UIManager uIManager, ItemManager itemManager, QuestManager questManager)
         {
             turnBuildup -= GlobalVariables.actionThreshold;
-            return entity.ChooseAction(map, map.GetEntityIndex(entity), uIManager, itemManager);
+            return entity.ChooseAction(map, map.GetEntityIndex(entity), uIManager, itemManager, questManager);
         }
     }
 }
