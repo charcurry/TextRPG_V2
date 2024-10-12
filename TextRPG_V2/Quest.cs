@@ -34,7 +34,7 @@ namespace TextRPG_V2.Managers
         /// <param name="questType">type of quest</param>
         /// <param name="numThingsDone">progress on quest</param>
         /// <param name="maxNumThingsRequired">max required progress on quest</param>
-        public Quest(string name, string description, QuestType questType, int numThingsDone, int maxNumThingsRequired)
+        public Quest(string name, string description, QuestType questType, int maxNumThingsRequired = 1, int numThingsDone = 0)
         {
             this.questType = questType;
             this.name = name;

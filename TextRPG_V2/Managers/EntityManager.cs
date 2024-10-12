@@ -106,11 +106,15 @@ namespace TextRPG_V2
                 // Player has stepped on the exit tile
                 if (questManager.GetCompletedQuests().Count != questManager.GetAllQuests().Count() - 1)
                 {
+                    Debug.WriteLine(questManager.GetCompletedQuests().Count);
+                    Debug.WriteLine(questManager.GetAllQuests().Count() - 1);
                     // Only allow player to exit if all other quests are completed
                     uIManager.AddEventToLog("Cannot exit unless all other quests are completed");
                 }
-                else
+                else if (questManager.GetCompletedQuests().Count == questManager.GetAllQuests().Count() - 1)
                 {
+                    Debug.WriteLine(questManager.GetCompletedQuests().Count);
+                    Debug.WriteLine(questManager.GetAllQuests().Count() - 1);
                     return true; // Game win condition met
                 }
 

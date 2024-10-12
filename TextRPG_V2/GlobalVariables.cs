@@ -39,6 +39,10 @@ namespace TextRPG_V2
         public const int minItemCost = 1;
         public const int maxItemCost = 5;
 
+        //Quests
+        public const int enemiesToKill = 1;
+        public const int itemsToPurchase = 3;
+
 
 
         //Map Variables

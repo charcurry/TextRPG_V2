@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TextRPG_V2.Managers;
+using static TextRPG_V2.GlobalVariables;
 
 namespace TextRPG_V2
 {
@@ -96,9 +98,9 @@ namespace TextRPG_V2
         /// </summary>
         public void CreateQuests()
         {
-            Quest quest1 = new Quest("Quest 1:", "Defeat 10 Enemies", Quest.QuestType.KillEnemies, 0, 10);
-            Quest quest2 = new Quest("Quest 2:", "Buy 3 Items", Quest.QuestType.PurchaseItems, 0, 3);
-            Quest quest3 = new Quest("Quest 3:", "Escape the Dungeon", Quest.QuestType.FindExit, 0, 13);
+            Quest quest1 = new Quest("Quest 1:", "Defeat " + enemiesToKill + (enemiesToKill == 1 ? " Enemy" : " Enemies"), Quest.QuestType.KillEnemies, enemiesToKill);
+            Quest quest2 = new Quest("Quest 2:", "Buy " + itemsToPurchase + (itemsToPurchase == 1 ? " Item" : " Items"), Quest.QuestType.PurchaseItems, itemsToPurchase);
+            Quest quest3 = new Quest("Quest 3:", "Escape the Dungeon", Quest.QuestType.FindExit);
 
             AddQuest(quest1);
             AddQuest(quest2);
