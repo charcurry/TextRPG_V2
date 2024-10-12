@@ -139,16 +139,19 @@ namespace TextRPG_V2
                 }
                 else if (gld.GetStat() > map.GetItem(endPos).cost && map.GetItem(endPos).cost > 0)
                 {
-                    //Debug.WriteLine(gld.GetStat());
-                    //Debug.WriteLine(map.GetItem(endPos).cost);
+                    // If the player walks on a purchasable item, the player will purchase the item and use it
+                    // while getting the cost of the item deducted from their gold
                     gld.ModStat(-map.GetItem(endPos).cost);
                     string purchaseMessage = map.GetItem(endPos).Purchase(this);
                     Debug.WriteLine(questManager.GetActiveQuests().Count());
-                    questManager.UpdateReleventQuest(uIManager, Quest.QuestType.PurchaseItems);
                     map.GetItem(endPos).Use(this);
                     itemManager.RemoveItem(map.GetItem(endPos));
                     map.RemoveItem(endPos);
-                    return purchaseMessage;
+
+                    // Update the purchase items quest
+                    questManager.UpdateReleventQuest(uIManager, Quest.QuestType.PurchaseItems);
+
+                    return purchaseMessage; // Returns different message if the player purchases the item
                 }
                 else
                 {

@@ -18,7 +18,7 @@ namespace TextRPG_V2.Items
         {
             atkIncrease = GlobalVariables.swordAtkIncrease;
             SetSymbol('s');
-            costSeed = 699;
+            costSeed = atkIncrease;
         }
 
         /// <summary>

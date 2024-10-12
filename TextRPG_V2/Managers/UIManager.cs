@@ -27,6 +27,7 @@ namespace TextRPG_V2
         /// Constructor method for a UIManager object which manages the User Interface
         /// </summary>
         /// <param name="entityManager">The entity manager for the game</param>
+        /// <param name="questManager">The quest manager for the game</param>
         public UIManager(EntityManager entityManager, QuestManager questManager)
         {
             //Instantiate all windows

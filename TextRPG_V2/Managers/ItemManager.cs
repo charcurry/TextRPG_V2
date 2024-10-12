@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using TextRPG_V2.Items;
+using static TextRPG_V2.GlobalVariables;
 
 namespace TextRPG_V2
 {
@@ -80,7 +81,7 @@ namespace TextRPG_V2
             if (IsNearShop(position,map))
             {
                 Random rnd = new Random(newItem.costSeed + Environment.TickCount);
-                newItem.cost = rnd.Next(1, 5); // Sets cost of item
+                newItem.cost = rnd.Next(minItemCost, maxItemCost); // Sets cost of item
             }
 
             return newItem;

@@ -110,6 +110,7 @@ namespace TextRPG_V2
         /// <param name="startPos">The position on which the entity starts its turn</param>
         /// <param name="uiManager">The manager for UI class objects</param>
         /// <param name="itemManager">The manager for Item class objects</param>
+        /// <param name="questManager">The manager for Quest class objects</param>
         /// <returns>String containing a description of the action</returns>
         public abstract string ChooseAction(Map map, int[] startPos, UIManager uiManager, ItemManager itemManager, QuestManager questManager);
 
@@ -121,6 +122,7 @@ namespace TextRPG_V2
         /// <param name="endPos">The position at which the entity will end their turn</param>
         /// <param name="uiManager">The manager for UI class objects</param>
         /// <param name="itemManager">he manager for Item class objects</param>
+        /// <param name="questManager">The manager for Quest class objects</param>
         /// <returns>String containing a result of the move action</returns>
         public string Move(Map map, int[] startPos, int[] endPos, UIManager uiManager, ItemManager itemManager, QuestManager questManager)
         {

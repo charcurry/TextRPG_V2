@@ -39,6 +39,7 @@ namespace TextRPG_V2
         /// <param name="startPos">The position on which the mage starts its turn</param>
         /// <param name="uiManager">The manager for UI class objects</param>
         /// <param name="itemManager">The manager for Item class objects</param>
+        /// <param name="questManager">The manager for Quest class objects</param>
         /// <returns>String containing a description of the action</returns>
         public override string ChooseAction(Map map, int[] startPos, UIManager uiManager, ItemManager itemManager, QuestManager questManager)
         {

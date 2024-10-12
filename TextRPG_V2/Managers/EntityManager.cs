@@ -79,7 +79,7 @@ namespace TextRPG_V2
             }
         }
 
-        bool playerPreviouslyOnExit = false;
+        bool playerPreviouslyOnExit = false; // Flag to check if player was previously on exit so the message is only displayed once
 
         /// <summary>
         /// Method that instructs the EntityManager to update all entities in the EntityTurn list.
@@ -106,6 +106,7 @@ namespace TextRPG_V2
                 // Player has stepped on the exit tile
                 if (questManager.GetCompletedQuests().Count != questManager.GetAllQuests().Count() - 1)
                 {
+                    // Only allow player to exit if all other quests are completed
                     uIManager.AddEventToLog("Cannot exit unless all other quests are completed");
                 }
                 else
@@ -153,10 +154,13 @@ namespace TextRPG_V2
                 {
                     if (entityTurns[i].entity.killedByPlayer)
                     {
+                        // Give the player gold when they kill an enemy
                         int luck = (int)GetPlayer().luc.GetStat() * (int)GlobalVariables.goldLucWeight;
                         GetPlayer().gld.ModStat(entityTurns[i].entity.gld.GetStat() + luck);
                         uIManager.AddEventToLog(entityTurns[i].entity.GetName() + " died.");
                         uIManager.AddEventToLog("Player found " + entityTurns[i].entity.gld.GetStat().ToString() + " gold.");
+
+                        // Update the killing enemies quest when the player kills an enemy
                         questManager.UpdateReleventQuest(uIManager, Quest.QuestType.KillEnemies);
                     }
                     else
