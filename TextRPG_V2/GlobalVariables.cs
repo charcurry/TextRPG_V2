@@ -36,11 +36,11 @@ namespace TextRPG_V2
         public const int swordAtkIncrease = 5;
         public const float goldLucWeight = 0.5f;
         public const int goldValue = 100;
-        public const int minItemCost = 1;
-        public const int maxItemCost = 5;
+        public const int minItemCost = 10;
+        public const int maxItemCost = 50;
 
         //Quests
-        public const int enemiesToKill = 1;
+        public const int enemiesToKill = 10;
         public const int itemsToPurchase = 3;
 
 
